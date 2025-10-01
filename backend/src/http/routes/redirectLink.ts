@@ -1,0 +1,34 @@
+import { FastifyInstance } from "fastify";
+import { z } from "zod";
+import { db } from "../../db/connection";
+import { links } from "../../db/schema";
+import { nanoid } from "nanoid";
+import { sql } from "drizzle-orm";
+
+export async function redirectLink(app: FastifyInstance) {
+    app.get('/:code', async (req, res) => {
+        const getLinkSchema = z.object({
+            code: z.string().min(3),
+        });
+
+        const { code } = getLinkSchema.parse(req.body);
+
+        const [ link ] = await db
+            .select({ originalUrl: links.originalUrl, id: links.id })
+            .from(links)
+            .where(sql`code = ${code}`);
+
+        if(!link) {
+            return res.status(404).send({ message: 'Link not found.' });
+        }
+
+        await db
+            .update(links)
+            .set({
+                accessCount: sql`access_count + 1`,
+            })
+            .where(sql`id = ${link.id}`);
+
+        return res.status(301).redirect(link.originalUrl);
+    });
+}
