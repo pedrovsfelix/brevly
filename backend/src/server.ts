@@ -6,6 +6,7 @@ import { createLink } from "./http/routes/createLink";
 import { redirectLink } from "./http/routes/redirectLink";
 import { getLinks } from "./http/routes/getLinks";
 import { deleteLink } from "./http/routes/deleteLink";
+import { exportLinks } from "./http/routes/exportLinks";
 
 const app = fastify();
 
@@ -17,6 +18,7 @@ app.register(getLinks);
 app.register(createLink);
 app.register(deleteLink);
 app.register(redirectLink);
+app.register(exportLinks);
 
 const start = async () => {
     try {
