@@ -2,8 +2,9 @@ import { migrate } from "drizzle-orm/postgres-js/migrator";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import path from "path";
+import { env } from "../env";
 
-const connectionString = 'postgresql://docker:docker@localhost:5432/brevly';
+const connectionString = env.DATABASE_URL;
 const sql = postgres(connectionString, { max: 1 });
 const db = drizzle(sql);
 

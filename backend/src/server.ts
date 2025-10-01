@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
+import { env } from "./env";
 
 const app = fastify();
 
@@ -13,7 +14,7 @@ app.get('/', async () => {
 
 const start = async () => {
     try {
-        await app.listen({ port: 3333 });
+        await app.listen({ port: env.PORT });
         console.log(`🚀 HTTP Server is running in http://localhost:3333`);
     } catch (err) {
         app.log.error(err);
