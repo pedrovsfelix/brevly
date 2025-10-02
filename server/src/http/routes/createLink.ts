@@ -1,12 +1,17 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { db } from "../../db/connection";
 import { links } from "../../db/schema";
 import { nanoid } from "nanoid";
 import { sql } from "drizzle-orm";
 
+type CreateLinkBody = {
+  originalUrl: string;
+  code?: string;
+}
+
 export async function createLink(app: FastifyInstance) {
-    app.post('/links', async (req, res) => {
+    app.post('/links', async (req: FastifyRequest<{ Body: CreateLinkBody }>, res: FastifyReply) => {
         const createLinkSchema = z.object({
             originalUrl: z.string().url(),
             code: z.string().min(3).optional(),
