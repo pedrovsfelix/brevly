@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc && copyfiles \"src/db/migrations/**/*.sql\" dist/db/migrations && copyfiles \"src/db/migrations/meta/_journal.json\" dist/db/migrations/meta",
+    "build": "tsup",
     "build:win": "tsc && copyfiles \"src/db/migrations/**/*.sql\" \"src/db/migrations/meta/*\" dist/db/migrations",
     "start": "node dist/db/migrate.js && node dist/server.js",
     "db:generate": "drizzle-kit generate",
@@ -16,9 +16,6 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "devDependencies": {
-    "copyfiles": "^2.4.1"
-  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.901.0",
     "@aws-sdk/s3-request-presigner": "^3.901.0",
@@ -33,6 +30,7 @@
     "papaparse": "^5.5.3",
     "pg": "^8.16.3",
     "postgres": "^3.4.4",
+    "tsup": "^8.5.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "zod": "^4.1.11"
