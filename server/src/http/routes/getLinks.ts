@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { db } from "../../db/connection";
-import { links } from "../../db/schema";
+import { db } from "../../db/connection.js";
+import { links } from "../../db/schema.js";
 import { desc } from "drizzle-orm";
 
 export async function getLinks(app: FastifyInstance) {

@@ -2,11 +2,11 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import 'dotenv/config';
 
-import { createLink } from "./http/routes/createLink";
-import { redirectLink } from "./http/routes/redirectLink";
-import { getLinks } from "./http/routes/getLinks";
-import { deleteLink } from "./http/routes/deleteLink";
-import { exportLinks } from "./http/routes/exportLinks";
+import { createLink } from "./http/routes/createLink.js";
+import { redirectLink } from "./http/routes/redirectLink.js";
+import { getLinks } from "./http/routes/getLinks.js";
+import { deleteLink } from "./http/routes/deleteLink.js";
+import { exportLinks } from "./http/routes/exportLinks.js";
 
 const app = fastify();
 

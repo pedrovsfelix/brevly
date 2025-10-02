@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { db } from "../../db/connection";
-import { links } from "../../db/schema";
+import { db } from "../../db/connection.js";
+import { links } from "../../db/schema.js";
 import { sql } from "drizzle-orm";
 
 type DeleteLinkParams = {

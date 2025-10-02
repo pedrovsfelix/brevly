@@ -1,10 +1,10 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { db } from "../../db/connection";
-import { links } from "../../db/schema";
+import { db } from "../../db/connection.js";
+import { links } from "../../db/schema.js";
 import Papa from "papaparse";
-import { r2 } from "../../lib/cloudflare";
+import { r2 } from "../../lib/cloudflare.js";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { env } from "../../env";
+import { env } from "../../env.js";
 import { randomUUID } from "node:crypto";
 
 export async function exportLinks(app: FastifyInstance) {
