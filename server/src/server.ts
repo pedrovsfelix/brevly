@@ -10,8 +10,10 @@ import { exportLinks } from "./http/routes/exportLinks";
 
 const app = fastify();
 
+const corsOrigin = env.FRONTEND_URL || '*';
+
 app.register(cors, {
-    origin: '*',
+    origin: corsOrigin,
 });
 
 app.register(getLinks);
