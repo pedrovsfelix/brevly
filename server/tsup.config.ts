@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsup';
+import { exec } from 'child_process';
 
 export default defineConfig({
   entry: ['src/**/*.ts'],
@@ -8,5 +9,10 @@ export default defineConfig({
   clean: true,
   dts: false,
   outDir: 'dist',
-  publicDir: 'src/db/migrations',
+
+  async onSuccess() {
+    console.log('Build bem-sucedido! Copiando arquivos de migração...');
+
+    exec('cp -r src/db/migrations dist/db/');
+  },
 });
