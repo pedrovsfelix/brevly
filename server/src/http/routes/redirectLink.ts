@@ -32,6 +32,6 @@ export async function redirectLink(app: FastifyInstance) {
             })
             .where(sql`id = ${link.id}`);
 
-        return res.status(301).redirect(link.originalUrl);
+        return res.status(301).send(link.originalUrl);
     });
 }
