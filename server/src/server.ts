@@ -1,6 +1,6 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
-import { env } from "./env";
+import 'dotenv/config';
 
 import { createLink } from "./http/routes/createLink";
 import { redirectLink } from "./http/routes/redirectLink";
@@ -10,7 +10,7 @@ import { exportLinks } from "./http/routes/exportLinks";
 
 const app = fastify();
 
-const corsOrigin = env.FRONTEND_URL || '*';
+const corsOrigin = process.env.FRONTEND_URL || '*';
 
 app.register(cors, {
     origin: corsOrigin,
@@ -24,8 +24,9 @@ app.register(exportLinks);
 
 const start = async () => {
     try {
-        await app.listen({ port: env.PORT, host: '0.0.0.0' });
-        console.log(`🚀 HTTP server running on http://localhost:${env.PORT}`);
+        const port = Number(process.env.PORT) || 3000;
+        await app.listen({ port, host: '0.0.0.0' });
+        console.log(`🚀 HTTP server running on http://localhost:${port}`);
     } catch (err) {
         app.log.error(err);
         process.exit(1);
