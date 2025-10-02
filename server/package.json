@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc && copyfiles -u 1 src/db/migrations/**/* dist/db/migrations",
-    "start": "node dist/server.js",
+    "build": "tsc && copyfiles \"src/db/migrations/**/*.sql\" \"src/db/migrations/meta/*\" dist/db/migrations",
+    "build:win": "tsc && copyfiles \"src/db/migrations/**/*.sql\" \"src/db/migrations/meta/*\" dist/db/migrations",
+    "start": "node dist/db/migrate.js && node dist/server.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx src/db/migrate.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
