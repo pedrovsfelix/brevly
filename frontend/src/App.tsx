@@ -1,10 +1,25 @@
-function App() {
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Redirect } from "./pages/Redirect";
+import { NotFound } from "./pages/NotFound";
 
-  return (
-    <>
-      <h1> hello app! </h1>
-    </>
-  )
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+  },
+  {
+    path: '/:code',
+    element: <Redirect />,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
+]);
+
+export function App() {
+
+  return <RouterProvider router={router} />;
+
 }
-
-export default App
