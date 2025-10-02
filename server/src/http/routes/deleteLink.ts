@@ -1,11 +1,16 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { db } from "../../db/connection";
 import { links } from "../../db/schema";
 import { sql } from "drizzle-orm";
 
+type DeleteLinkBody = {
+  originalUrl: string;
+  code?: string;
+}
+
 export async function deleteLink(app: FastifyInstance) {
-    app.delete('/links/:id', async (req, res) => {
+    app.delete('/links/:id', async (req: FastifyRequest<{ Body: DeleteLinkBody }>, res: FastifyReply) => {
         const deleteLinkSchema = z.object({
             id: z.coerce.number().int().positive(),
         });

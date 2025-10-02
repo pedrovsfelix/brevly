@@ -1,12 +1,17 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { db } from "../../db/connection";
 import { links } from "../../db/schema";
 import { nanoid } from "nanoid";
 import { sql } from "drizzle-orm";
 
+type RedirectLinkBody = {
+  originalUrl: string;
+  code?: string;
+}
+
 export async function redirectLink(app: FastifyInstance) {
-    app.get('/:code', async (req, res) => {
+    app.get('/:code', async (req: FastifyRequest<{ Body: RedirectLinkBody }>, res: FastifyReply) => {
         const getLinkSchema = z.object({
             code: z.string().min(3),
         });
