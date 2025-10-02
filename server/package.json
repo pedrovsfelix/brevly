@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 1 src/db/migrations/**/* dist/db/migrations",
     "start": "node dist/server.js",
     "db:generate": "drizzle-kit generate:pg",
     "db:migrate": "tsx src/db/migrate.ts",
@@ -16,7 +16,7 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    
+    "copyfiles": "^2.4.1"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.901.0",
@@ -25,15 +25,15 @@
     "@types/node": "^24.6.1",
     "@types/papaparse": "^5.3.16",
     "dotenv": "^17.2.3",
-    "drizzle-orm": "^0.44.5",
     "drizzle-kit": "^0.31.5",
+    "drizzle-orm": "^0.44.5",
     "fastify": "^5.6.1",
     "nanoid": "^3.3.7",
+    "papaparse": "^5.5.3",
     "pg": "^8.16.3",
     "postgres": "^3.4.4",
-    "zod": "^4.1.11",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3",
-    "papaparse": "^5.5.3",
-    "tsx": "^4.20.6"
+    "zod": "^4.1.11"
   }
 }
