@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc && copyfiles \"src/db/migrations/**\" dist/db/migrations",
+    "build": "tsc && copyfiles -a \"src/db/migrations/**\" dist/db/migrations",
     "build:win": "tsc && copyfiles \"src/db/migrations/**/*.sql\" \"src/db/migrations/meta/*\" dist/db/migrations",
     "start": "node dist/db/migrate.js && node dist/server.js",
     "db:generate": "drizzle-kit generate",
