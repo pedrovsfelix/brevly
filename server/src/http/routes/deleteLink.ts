@@ -4,27 +4,26 @@ import { db } from "../../db/connection";
 import { links } from "../../db/schema";
 import { sql } from "drizzle-orm";
 
-type DeleteLinkBody = {
-  originalUrl: string;
-  code?: string;
+type DeleteLinkParams = {
+  id: number;
 }
 
 export async function deleteLink(app: FastifyInstance) {
-    app.delete('/links/:id', async (req: FastifyRequest<{ Body: DeleteLinkBody }>, res: FastifyReply) => {
+    app.delete('/links/:id', async (req: FastifyRequest<{ Params: DeleteLinkParams }>, res: FastifyReply) => {
         const deleteLinkSchema = z.object({
             id: z.coerce.number().int().positive(),
         });
 
         const { id } = deleteLinkSchema.parse(req.params);
 
-        const [ deleteLink ] = await db
+        const [ deletedLink ] = await db
             .delete(links)
             .where(sql`id = ${id}`)
             .returning({
                 id: links.id,
             });
 
-        if(!deleteLink) {
+        if(!deletedLink) {
             return res.status(404).send({ message: 'Link not found!'});
         }
 

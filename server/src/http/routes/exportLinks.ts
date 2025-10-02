@@ -7,13 +7,8 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { env } from "../../env";
 import { randomUUID } from "node:crypto";
 
-type ExportLinkBody = {
-  originalUrl: string;
-  code?: string;
-}
-
 export async function exportLinks(app: FastifyInstance) {
-    app.post('/reports/links', async (req: FastifyRequest<{ Body: ExportLinkBody }>, res: FastifyReply) => {
+    app.post('/reports/links', async (req: FastifyRequest, res: FastifyReply) => {
         const allLinks = await db.select().from(links);
 
         if( allLinks.length === 0 ){
