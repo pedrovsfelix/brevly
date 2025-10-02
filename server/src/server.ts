@@ -14,6 +14,8 @@ const corsOrigin = process.env.FRONTEND_URL || '*';
 
 app.register(cors, {
     origin: corsOrigin,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 });
 
 app.register(getLinks);
